@@ -24,7 +24,7 @@ def index(request):
     # Use the get_page() method to retrieve the items for the current page, page_obj and paginator have  numberous methods and fields required for pagionation.
     posts = paginator.get_page(page_number)
 
-    print('page_obj = ' , posts.number,'page_number = ', page_number, 'count ', paginator.num_pages)
+    print('page_obj = ' , posts.number,'page_number = ', page_number, 'count ', posts.number)
 
     data_dict = { 'posts' : posts }
     return render(request, 'index.html', data_dict)
@@ -34,6 +34,8 @@ def index(request):
 def get_post_details(request, post_id):
     try:
         post = Post.objects.get(pk = post_id)
+        post.views_count = post.views_count + 1
+        post.save()
     except ObjectDoesNotExist as e:
         return render(request, 'post_details.html', { 'error_message' : str(e)})
     
