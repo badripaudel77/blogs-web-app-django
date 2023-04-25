@@ -38,7 +38,9 @@
              {% endfor %}
         </li> <br>
         <li class="list-inline-item">Category : <code>{{ post.category.name }} </code></li>
-        <li class="list-inline-item"> Author : <b>{{ post.author.name }}</b> </li> <br>
+        <li class="list-inline-item">
+            <b><div>Author: <a href="/author/{{post.author.id}}/blogs" style="text-decoration: none;">{{post.author.name}}</a></div></b> 
+        </li> <br>
       </ul>
     </div>
     <div class="col-12" style="margin-bottom: 40px;">

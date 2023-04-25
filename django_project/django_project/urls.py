@@ -25,5 +25,6 @@ urlpatterns = [
     path('', blog_views.index, name = 'blog_index_page'), 
     path('blogs/details/<int:post_id>', blog_views.get_post_details, name = 'blog_details'),
     path('blogs', blog_views.get_blogs),
+    path('author/<int:author_id>/blogs', blog_views.all_posts_of_author, name = "author_blogs" ),
     path('today', blog_views.date_today, name = 'blog_time_today'), 
 ]

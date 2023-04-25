@@ -2,7 +2,7 @@
 {% comment %} This index.html uses the base.html as it's base template which later on can be overriden {% endcomment %}
 
  {% comment %} override title block of the parent template  {% endcomment %}
-<div>{% block title %} {{ title }} | Home Page {% endblock %}</div>
+<div>{% block title %} {{ title }} | Author's Blogs Page {% endblock %}</div>
 
  {% comment %} Override content block in the base.html  {% endcomment %}
 {% block content %}
@@ -33,8 +33,6 @@
           </div>
           <i class="fa fa-sharp fa-solid fa-certificate" style="color: red;"></i>&nbsp; <code>{{ post.category.name }} </code> &nbsp; 
           <i class="fa fa-eye" aria-hidden="true" style="color: green;"></i> {{ post.views_count }} times
-          <br>
-          <div>Author: <a href="author/{{post.author.id}}/blogs" style="text-decoration: none;">{{post.author.name}}</a></div> <br />
         </div>
       </div>
     </div>

@@ -7,7 +7,6 @@ from django.core.paginator import Paginator
 
 
 from django import template
-from django.conf import settings
 
 ITEM_PER_PAGE = 6
 
@@ -23,9 +22,6 @@ def index(request):
         page_number = 1
     # Use the get_page() method to retrieve the items for the current page, page_obj and paginator have  numberous methods and fields required for pagionation.
     posts = paginator.get_page(page_number)
-
-    print('page_obj = ' , posts.number,'page_number = ', page_number, 'count ', posts.number)
-
     data_dict = { 'posts' : posts }
     return render(request, 'index.html', data_dict)
     
@@ -43,6 +39,19 @@ def get_post_details(request, post_id):
 
 def get_blogs(request):
     return redirect('/')
+
+# get all the posts of the author
+def all_posts_of_author(request, author_id):
+    author_posts = Post.objects.all().filter(author_id = author_id).order_by('-pub_date')
+    paginator = Paginator(author_posts, ITEM_PER_PAGE)
+    page_number = request.GET.get('page')
+
+    if page_number is None:
+        page_number = 1
+    posts = paginator.get_page(page_number)
+
+    print('author id ' , author_id, ' author\'s post = ', author_posts[0].author.name)
+    return render(request, 'author_posts.html', { 'posts' : posts})
 
 # Test method
 def date_today(request):
