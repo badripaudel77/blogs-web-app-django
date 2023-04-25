@@ -32,10 +32,10 @@ def get_post_details(request, post_id):
         post = Post.objects.get(pk = post_id)
         post.views_count = post.views_count + 1
         post.save()
+        related_posts = get_related_posts(post.category)
     except ObjectDoesNotExist as e:
         return render(request, 'post_details.html', { 'error_message' : str(e)})
-    
-    return render(request, 'post_details.html', { 'post' : post})
+    return render(request, 'post_details.html', { 'post' : post, 'related_posts' : related_posts })
 
 def get_blogs(request):
     return redirect('/')
@@ -50,8 +50,11 @@ def all_posts_of_author(request, author_id):
         page_number = 1
     posts = paginator.get_page(page_number)
 
-    print('author id ' , author_id, ' author\'s post = ', author_posts[0].author.name)
-    return render(request, 'author_posts.html', { 'posts' : posts})
+    return render(request, 'author_posts.html', { 'posts' : posts, 'author' : posts[0].author.name })
+
+def get_related_posts(category):
+    return Post.objects.all().filter(category = category ).order_by('-pub_date')[:3]
+
 
 # Test method
 def date_today(request):
