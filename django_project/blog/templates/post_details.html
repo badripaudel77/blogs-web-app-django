@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if error_message %}
+   <div class="container py-5">
+      <div class="row">
+        <div class="col-lg-8 mx-auto text-center">
+          <h1 class="display-1">Oops!</h1>
+          <h2 class="display-4">Page Not Found</h2>
+          <p class="lead mb-5">The page you are looking for could not be found. It may have been removed, renamed, or url is invalid.</p>
+          <a href="/" class="btn btn-success btn-md">Go back to Home</a>
+        </div>
+      </div>
+    </div>
+{% endif %}
+
+{% if post %}
+<div style="margin: 60px;">
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <h1 class="mb-3">{{ post.title }}</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <img src="{{ post.img_url }}" class="img-fluid mb-4" alt="{{ post.title }}" style="max-height: 350px;min-height: 350px; width: 90%;">
+      <p class="lead"> {{ post.content }} </p>
+    </div>
+  </div>
+  <div class="row mb-4">
+    <div class="col-12">
+      <ul class="list-inline">
+        <li class="list-inline-item">Tags : 
+            {% for tag in post.tags.all %}
+               <kbd>{{ tag.name }}</kbd>
+             {% endfor %}
+        </li> <br>
+        <li class="list-inline-item">Category : <code>{{ post.category.name }} </code></li>
+        <li class="list-inline-item"> Author : <b>{{ post.author.name }}</b> </li> <br>
+      </ul>
+    </div>
+    <div class="col-12" style="margin-bottom: 40px;">
+      <ul class="list-inline">
+        <li class="list-inline-item"></i> Published : {{ post.pub_date | date}}</li>
+        <li class="list-inline-item"> <i class="fa fa-eye" aria-hidden="true" style="color: green;"></i> - {{ post.views_count }}</li>
+      </ul>
+    </div>
+  </div>
+</div>
+</div>
+
+{% endif %}  
+
+{% endblock %}

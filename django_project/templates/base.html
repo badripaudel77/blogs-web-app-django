@@ -1,0 +1,102 @@
+{% comment %} 
+- This is the base html file  whose content can be replaced dynamically 
+{% endcomment %}
+
+{% comment %} 
+- The block tag defines a block that can be overridden by the child templates. 
+- What is a child template? A template which uses base.html as its base 
+- or more formally speaking a child template is a template which extends the base template.  
+{% endcomment %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    {% comment %} Title block {% endcomment %}
+    <title>{% block title %} The Amigos' Blogs {% endblock %}</title>
+    {% comment %} fontawesome {% endcomment %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    {% comment %} bootstrap 5 {% endcomment %}
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <style>
+    .card {
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        padding: 16px;
+        margin-bottom: 16px;
+      }
+      .card-title {
+        font-size: 24px;
+        margin-bottom: 8px;
+      }
+      .card-description {
+        font-size: 16px;
+        margin-bottom: 8px;
+      }
+      .card-details {
+        font-size: 14px;
+        color: #999;
+        margin-bottom: 8px;
+      }
+      .card-image {
+        width: 100%;
+        max-width: 500px;
+        height: auto;
+        margin-bottom: 8px;
+      }
+      .post-section {
+        margin-bottom: 32px;
+      }
+      .post-section-heading {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 16px;
+      }
+      .footer {
+        background-color: #333;
+        color: white;
+        text-align: center;
+        padding: 10px;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    {% comment %} Navbar [header] section {% endcomment %}
+    <div class="navbar">
+        {% include 'navbar.html' %}
+    </div>
+
+    {% comment %} content will be replaced here later on. {% endcomment %}
+    {% comment %} Content block {% endcomment %}
+    {% comment %} Sidebar Section {% endcomment %}
+     {% block content %} 
+      <div class="content"></div>
+     {% endblock %}
+  </div>
+
+{% comment %} Footer section {% endcomment %}
+  {% block footer %}
+    <div class="footer">
+        <footer>
+            {% comment %} Footer block {% endcomment %}
+              <p>Amigos' Blogs 2023 &copy; All Rights Reserved.</p>
+              Developed by
+              <a href="https://www.linkedin.com/in/badri-paudel/" target="_blank" style="text-decoration: none; color: darkcyan">Badri Paudel</a>
+        </footer>
+    </div>
+  {% endblock %}
+  </body>
+</html>
