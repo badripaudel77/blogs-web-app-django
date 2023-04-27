@@ -36,6 +36,7 @@ class Category(models.Model):
 class Tag(models.Model):
     name = models.CharField(max_length=100, unique=True)
     slug = models.SlugField(max_length=100, blank=True, unique=True, help_text = "slug will be generated automatically from the title of the post")
+    # If author is deleted, tag will be deleted [might not be realistic, it can always be changed as desired.]
     author = models.ForeignKey(Author, on_delete = models.CASCADE)
     created_on = models.DateTimeField(auto_now_add = True)
     """If table name needs to be changed , do this """
@@ -51,10 +52,21 @@ class Post(models.Model):
     slug = models.SlugField(unique=True, blank=True)
     content = models.TextField()
     img_url = models.CharField(default = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9XeELcp51xMR6GcbG86ssM_CLpG0QqiN9dw&usqp=CAU')
-    pub_date = models.DateTimeField(auto_now_add=True)    
+    pub_date = models.DateTimeField(auto_now_add=True) 
+
+    """Each post will have cateogry_id, many tags, and author_id"""
     author = models.ForeignKey(Author,on_delete = models.CASCADE)
-    category = models.ForeignKey(Category, on_delete = models.CASCADE) # one Post to Many category
+    category = models.ForeignKey(Category, on_delete = models.CASCADE) # one Post to Many category 
     tags = models.ManyToManyField(Tag) # many to many
     views_count = models.IntegerField(blank= True, help_text = "It will be updated dynamically and no need to set from admin.")
     likes_count = models.IntegerField(default = 0)
 
+
+# Comment
+class Comment(models.Model):
+    posted_by = models.CharField(max_length = 100, blank = False)
+    comment_desc = models.CharField(max_length = 500, blank = False)
+    # Delete comments if post is deleted
+    post = models.ForeignKey(Post, on_delete = models.CASCADE)
+    created_on = models.DateTimeField(auto_now_add = True)
+    

@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from datetime import datetime
-from blog.models import Post
+from blog.models import Post, Comment
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.paginator import Paginator
 
@@ -30,12 +30,27 @@ def index(request):
 def get_post_details(request, post_id):
     try:
         post = Post.objects.get(pk = post_id)
+        comments = Comment.objects.all().filter(post_id = post.id).order_by('-created_on')[:3]
         post.views_count = post.views_count + 1
         post.save()
         related_posts = get_related_posts(post.category)
     except ObjectDoesNotExist as e:
         return render(request, 'post_details.html', { 'error_message' : str(e)})
-    return render(request, 'post_details.html', { 'post' : post, 'related_posts' : related_posts })
+    return render(request, 'post_details.html', { 'post' : post, 'comments': comments, 'related_posts' : related_posts })
+
+#  post the comment 
+def post_comment(request,post_id):
+    if request.method == 'POST':
+        posted_by = request.POST['name']
+        comment_desc = request.POST['comment']
+        post = Post.objects.get(pk = post_id)
+        # comment.post = post 
+        comment = Comment(posted_by = posted_by, comment_desc = comment_desc, post = post)
+        comment.save()
+        # redirect to the same page
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+        # return get_post_details(request, post_id)
+   
 
 def get_blogs(request):
     return redirect('/')

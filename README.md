@@ -1,4 +1,3 @@
-
 - Install Python
 - Create Virtual Environment and activate
 
@@ -60,14 +59,15 @@
   {% include 'path_to_template_same_as_rendering' %}
   ```
 
-    . Django ORM :
+  . Django ORM :
 
-    - To save object to the db,``obj.save()``
+  - To save object to the db,``obj.save()``
+  - To delete the object from db,``obj.delete()``
 
-    - To delete the object from db,``obj.delete()``
-
-    Django by default adds a manager called`objects` to every model class. The `objects` manager helps us to interact     with the database in complicated ways. The `objects` manager is the most common way Django developers interact with the database. ``ModelClass.objects``
+  Django by default adds a manager called `objects` to every model class. The `objects` manager helps us to interact     with the database in complicated ways. The `objects` manager is the most common way Django developers interact with the database. ``ModelClass.objects``
 
 ```
 Author.objects.all()
 ```
+
+    . To enter into interactive shell, type :``python manage.py shell``
