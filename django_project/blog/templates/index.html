@@ -8,9 +8,9 @@
 {% block content %}
 
     <div class="row-12">
-      <h4 class="text-left" style="color: green;">Read My Blogs</h4>
+      <h4 class="text-left" style="margin-top: 60px; margin-left: 10px; color: green;">Read My Blogs</h4>
     </div>
-    <div style="display:flex; flex-wrap: wrap;">
+    <div style="display:flex; flex-wrap: wrap;" class="m-15">
      {% for post in posts %}
     <div class="col-md-4" style="margin-right:15px; width: 32% !important;">
       <div class="card mb-4">
@@ -44,7 +44,7 @@
   {% endfor %} 
   </div> 
   {% if posts.has_other_pages %}
-    <nav aria-label="Page navigation">
+    <nav aria-label="Page navigation" style="margin-bottom:100px;">
         <ul class="pagination justify-content-left">
             {% if posts.has_previous %}
                 <li class="page-item">
