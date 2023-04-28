@@ -7,13 +7,8 @@
  {% comment %} Override content block in the base.html  {% endcomment %}
 {% block content %}
 
-{% comment %} inherit content block's content, sidebar {% endcomment %}
-<div>{{ block.super }}</div>
-   
-<div class="container" style="margin:auto; margin-top: 60px; margin-bottom:100px;">
-  {% comment %}  Blogs {% endcomment %}
     <div class="row-12">
-      <h4 class="text-left" style="color: green;">Read My Blogs</h2>
+      <h4 class="text-left" style="color: green;">Read My Blogs</h4>
     </div>
     <div style="display:flex; flex-wrap: wrap;">
      {% for post in posts %}
@@ -21,16 +16,15 @@
       <div class="card mb-4">
         <img src="{{ post.img_url }}" class="card-img-top" alt="{{ post.title }}" style="height : 200px;">
         <div class="card-body">
-          <h5 class="card-title">{{ post.title | slice:":40" }} </h5>
-          <p>
-              {{ post.content | slice:":60" }} ... <a href="/blogs/details/{{post.id}}" style="text-decoration: none; color: green;">Read More</a> 
+					<h5 class="card-title">{{ post.title | slice:":40" }}</h5>
+                     {{ post.content | slice:":60" }} ... <a href="/blogs/details/{{post.id}}" style="text-decoration: none; color: green;">Read More</a>
           </p>
           <div>
-             <i class="fa fa-sharp fa-solid fa-tags" style="color: blue;"></i>&nbsp;
-             {% for tag in post.tags.all %}
-               <kbd>{{ tag.name }}</kbd>
-             {% endfor %}
-          </div>
+						<i class="fa fa-sharp fa-solid fa-tags" style="color: blue"></i
+						>&nbsp; {% for tag in post.tags.all %}
+						<kbd>{{ tag.name }}</kbd>
+						{% endfor %}
+					</div>
           <i class="fa fa-sharp fa-solid fa-certificate" style="color: red;"></i>&nbsp; <code>{{ post.category.name }} </code> &nbsp; 
           <i class="fa fa-eye" aria-hidden="true" style="color: green;"></i> {{ post.views_count }} times
           <br>
