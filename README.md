@@ -82,3 +82,5 @@
     To generate``requirements.txt `` :  ``pip freeze > requirements.txt``
 
     To install dependencies inside of requirments.txt, use :``pip install -r requirements.txt``
+
+    To Run this project, clone this repository and go to the main directory and run``python manage.py runserver``
