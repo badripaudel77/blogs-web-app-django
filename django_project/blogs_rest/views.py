@@ -1,6 +1,5 @@
 from django.shortcuts import get_object_or_404, render
 
-from rest_framework import serializers
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
@@ -13,7 +12,6 @@ from .serializers import PostSerializer
 # Create your views for rest api here.
 @api_view(['GET'])
 def welcome_readers(request):
-    print('hello from api')
     welcome_message = {
         'message': 'Welcome readers to my blogs',
         'greeted_by' : 'Badri Paudel'
@@ -39,7 +37,6 @@ class PostList(APIView):
 class PostDetail(APIView):
     # Request type is : GET , so get has been written here.
     def get(self, request, post_id):
-        print('----- details ------ ', post_id)
         post = get_object_or_404(Post, pk = post_id)
         serializer = PostSerializer(post, many = False)
         return Response(serializer.data)

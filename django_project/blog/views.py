@@ -5,9 +5,6 @@ from blog.models import Post, Comment
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.paginator import Paginator
 
-
-from django import template
-
 ITEM_PER_PAGE = 6
 
 """
@@ -44,7 +41,6 @@ def post_comment(request,post_id):
         posted_by = request.POST['name']
         comment_desc = request.POST['comment']
         post = Post.objects.get(pk = post_id)
-        # comment.post = post 
         comment = Comment(posted_by = posted_by, comment_desc = comment_desc, post = post)
         comment.save()
         # redirect to the same page

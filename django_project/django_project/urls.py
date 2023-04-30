@@ -38,11 +38,11 @@ urlpatterns = [
     path('author/<int:author_id>/blogs', blog_views.all_posts_of_author, name = "author_blogs" ),
     path('today', blog_views.date_today, name = 'blog_time_today'), 
 
-    # urls for rest API
     # optional but useful 
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('api-token-auth/', views.obtain_auth_token),
     path('', include(router.urls)),
+    # urls for rest API
     path('api/v1/blogs/welcome/', blogs_rest.welcome_readers, name = 'blogs_rest_welcome'),
     path('api/v1/blogs/list/', blogs_rest.PostList.as_view(), name = 'blogs_list'),
     path('api/v1/blogs/<int:post_id>/details', blogs_rest.PostDetail.as_view(), name = 'blog_details'),
