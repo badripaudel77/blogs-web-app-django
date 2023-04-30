@@ -1,13 +1,13 @@
-### This is a full stack application that has complete web blogs application with following features : 
+### This is a full stack application that has complete web blogs application with following features :
+
 - Home Page lists all the posts with paginated result
-- On clicking post, leads to the details page with author details, category, tags etc. 
+- On clicking post, leads to the details page with author details, category, tags etc.
 - Clicking on author name, takes to the page where all the blogs posts written by that author will be dispalyed.
 - Clicking on category will do very similar as above but category related posts.
 - User can comment on this blog post, only three recent comments of the post have been fetched.
-
 - Also , rest api for Post models [related to blogs] , all the CRUD functionality have been implemented.
 
-------------------------------------------
+---
 
 - Install Python
 - Create Virtual Environment and activate
@@ -69,14 +69,16 @@
   ```
   {% include 'path_to_template_same_as_rendering' %}
   ```
-
 - Django ORM :
-
 - To save object to the db,``obj.save()``
 - To delete the object from db,``obj.delete()``
 
   Django by default adds a manager called `objects` to every model class. The `objects` manager helps us to interact     with the database in complicated ways. The `objects` manager is the most common way Django developers interact with the database. ``ModelClass.objects``
 
-```Author.objects.all()```
+    ``Author.objects.all()``
 
-To enter into interactive shell, type :```python manage.py shell```
+    To enter into interactive shell, type :``python manage.py shell``
+
+    To generate``requirements.txt `` :  ``pip freeze > requirements.txt``
+
+    To install dependencies inside of requirments.txt, use :``pip install -r requirements.txt``
