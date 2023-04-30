@@ -1,3 +1,14 @@
+### This is a full stack application that has complete web blogs application with following features : 
+- Home Page lists all the posts with paginated result
+- On clicking post, leads to the details page with author details, category, tags etc. 
+- Clicking on author name, takes to the page where all the blogs posts written by that author will be dispalyed.
+- Clicking on category will do very similar as above but category related posts.
+- User can comment on this blog post, only three recent comments of the post have been fetched.
+
+- Also , rest api for Post models [related to blogs] , all the CRUD functionality have been implemented.
+
+------------------------------------------
+
 - Install Python
 - Create Virtual Environment and activate
 
