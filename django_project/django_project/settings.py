@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blog', # blog was installed later on. Need to add it here to inform.
+    'blogs_rest',
+    'rest_framework', # include rest framework
 ]
 
 MIDDLEWARE = [

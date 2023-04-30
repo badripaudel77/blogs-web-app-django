@@ -17,6 +17,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from blog import views as blog_views
+from blogs_rest import views as blogs_rest
+
+from rest_framework import routers
+from rest_framework.authtoken import views
+from django.urls import include, path
+
+from blogs_rest import views as blogs_rest
+
+router = routers.DefaultRouter()
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,4 +37,13 @@ urlpatterns = [
     path('blogs', blog_views.get_blogs),
     path('author/<int:author_id>/blogs', blog_views.all_posts_of_author, name = "author_blogs" ),
     path('today', blog_views.date_today, name = 'blog_time_today'), 
+
+    # urls for rest API
+    # optional but useful 
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path('api-token-auth/', views.obtain_auth_token),
+    path('', include(router.urls)),
+    path('api/v1/blogs/welcome/', blogs_rest.welcome_readers, name = 'blogs_rest_welcome'),
+    path('api/v1/blogs/list/', blogs_rest.PostList.as_view(), name = 'blogs_list'),
+    path('api/v1/blogs/<int:post_id>/details', blogs_rest.PostDetail.as_view(), name = 'blog_details'),
 ]
