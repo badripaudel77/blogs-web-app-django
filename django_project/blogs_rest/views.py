@@ -5,9 +5,14 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework.decorators import APIView
 from rest_framework.response import Response
+from rest_framework.pagination import PageNumberPagination
 
 from blog.models import *
 from .serializers import PostSerializer
+
+
+class PostListPagination(PageNumberPagination):
+    page_size = 3  # Number of records to display per page
 
 # Create your views for rest api here.
 @api_view(['GET'])
@@ -30,8 +35,13 @@ class PostList(APIView):
     # get as it is going to be a
     def get(self, request):
         post_list = Post.objects.all()
-        serializer = PostSerializer(post_list, many = True)
-        return Response(serializer.data)
+        paginator = PageNumberPagination()
+        paginator.page_size = request.GET.get('page_size') # set the number of items per page
+        paginator.page = request.GET.get('page')
+        paginator.max_page_size = 100
+        result_page = paginator.paginate_queryset(post_list, request)
+        serializer = PostSerializer(result_page, many=True)
+        return paginator.get_paginated_response(serializer.data)
 
 #  Handle single post [post details]
 class PostDetail(APIView):
@@ -62,4 +72,3 @@ class PostDetail(APIView):
              "message" : "Post with Id {post_id} deleted successfully".format(post_id = post_id)
             }  
         return Response(deleted_message)
-        
